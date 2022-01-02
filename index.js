@@ -19,9 +19,9 @@ client.on("message", function(message) {
   if (command === "ping") {
     const timeTaken = Date.now() - message.createdTimestamp;
     message.reply(`Pong! This message had a latency of ${timeTaken}ms.`);                  
-  } 
-
-  if (!Number(args)) {
+  }
+  
+  if (!args && !Number(args)) {
     channel.send(`Para de ser otario: ${message.author}`);
     return;
   }
@@ -29,12 +29,12 @@ client.on("message", function(message) {
   
   if (command === "start") {
       VALOR_INICIAL = Number(args);
-      mensagemStart(message);
+      mensagemStart(channel);
   }
 
   if (command === "add") {
       VALOR_INICIAL++;
-      mensagemStart(message);
+      mensagemStart(channel);
   }
 
   if (command === "reset") {
@@ -43,7 +43,7 @@ client.on("message", function(message) {
 }
 });
 
-function mensagemStart(message) {
+function mensagemStart(channel) {
     if (VALOR_INICIAL === 1) {
         channel.send(`O Trouxa morreu: ${VALOR_INICIAL} vez!`);
     } else {
